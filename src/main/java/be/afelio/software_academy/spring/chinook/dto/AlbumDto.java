@@ -47,7 +47,9 @@ public class AlbumDto {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+		
 		result = prime * result + ((genres == null) ? 0 : genres.hashCode());
+		
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -74,8 +76,8 @@ public class AlbumDto {
 		if (title == null) {
 			if (other.title != null)
 				return false;
-		} else if (!title.equals(other.title))
-			return false;
+		} else if (!title.equals(other.title)) {
+			return false;}
 		return true;
 	}
 

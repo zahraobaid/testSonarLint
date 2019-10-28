@@ -36,7 +36,7 @@ public class AlbumController {
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception");
+			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception 1");
 			e.printStackTrace();
 		}
 
@@ -45,11 +45,11 @@ public class AlbumController {
 
 	@GetMapping(value = "artist/{Name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReponseDto<List<AlbumDto>>> findAllAlbumByArtistNameDtoWithMapping(
-			@PathVariable("Name") String Name) {
+			@PathVariable("Name") String name) {
 
 		ReponseDto<List<AlbumDto>> dto = null;
 		try {
-			List<AlbumDto> album = repository.findAllAlbumByArtistNameDtoWithMapping(Name);
+			List<AlbumDto> album = repository.findAllAlbumByArtistNameDtoWithMapping(name);
 			if (album == null) {
 				dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "album not found");
 			} else {
@@ -57,7 +57,7 @@ public class AlbumController {
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception");
+			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception 2");
 			e.printStackTrace();
 		}
 
@@ -74,7 +74,7 @@ public class AlbumController {
 		} catch (AlbumNotFoundException e) {
 			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "album not found");
 		} catch (Exception e) {
-			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "unexpected exception");
+			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "unexpected exception 3");
 		}
 
 		return ResponseEntity.ok(dto);
@@ -94,7 +94,7 @@ public class AlbumController {
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception");
+			dto = new ReponseDto<List<AlbumDto>>(ResponseDtoStatus.FAILURE, "unexpected exception 4");
 			e.printStackTrace();
 		}
 
