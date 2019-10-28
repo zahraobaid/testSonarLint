@@ -71,8 +71,8 @@ public class AlbumDto {
 		if (genres == null) {
 			if (other.genres != null)
 				return false;
-		} else if (!genres.equals(other.genres))
-			return false;
+		} else if (!genres.equals(other.genres)) {
+			return false;}
 		if (title == null) {
 			if (other.title != null)
 				return false;

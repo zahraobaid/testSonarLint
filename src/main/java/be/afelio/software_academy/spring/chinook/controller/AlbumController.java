@@ -70,9 +70,9 @@ public class AlbumController {
 
 		try {
 			repository.deleteAlbum(id);
-			dto = new ReponseDto(ResponseDtoStatus.SUCCESS, "album deleted");
+			dto = new ReponseDto<Object>(ResponseDtoStatus.SUCCESS, "album deleted");
 		} catch (AlbumNotFoundException e) {
-			dto = new ReponseDto(ResponseDtoStatus.FAILURE, "album not found");
+			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "album not found");
 		} catch (Exception e) {
 			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "unexpected exception 3");
 		}
