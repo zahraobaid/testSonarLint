@@ -25,19 +25,19 @@ public class TrackController {
 
 	@GetMapping(value = "album/{Title}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReponseDto<List<TrackDto>>> findAllTrackAlbumTitleDtoWithMapping(
-			@PathVariable("Title") String Title) {
+			@PathVariable("Title") String title) {
 
 		ReponseDto<List<TrackDto>> dto = null;
 		try {
-			List<TrackDto> track = repository.findAllTrackByAlbumTitleDtoWithMapping(Title);
+			List<TrackDto> track = repository.findAllTrackByAlbumTitleDtoWithMapping(title);
 			if (track == null) {
-				dto = new ReponseDto<List<TrackDto>>(ResponseDtoStatus.FAILURE, "track not found");
+				dto = new ReponseDto(ResponseDtoStatus.FAILURE, "track not found");
 			} else {
-				dto = new ReponseDto<List<TrackDto>>(ResponseDtoStatus.SUCCESS, "ok");
+				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, "ok");
 				dto.setPayload(track);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto<List<TrackDto>>(ResponseDtoStatus.FAILURE, "unexpected exception");
+			dto = new ReponseDto(ResponseDtoStatus.FAILURE, "unexpected exception");
 			e.printStackTrace();
 		}
 
