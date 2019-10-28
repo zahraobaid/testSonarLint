@@ -22,6 +22,9 @@ import be.afelio.software_academy.spring.chinook.persistence.ApplicationReposito
 public class AlbumController {
 	@Autowired
 	ApplicationRepository repository;
+	String fail = "album not found";
+	String success = "ok";
+	String exception = "unexpected exception";
 
 	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReponseDto<List<AlbumDto>>> findAll() {
@@ -30,19 +33,19 @@ public class AlbumController {
 		try {
 			List<AlbumDto> album = repository.findAllAlbumDtoWithMapping();
 			if (album == null) {
-				dto = new ReponseDto(ResponseDtoStatus.FAILURE, "album not found");
+				dto = new ReponseDto(ResponseDtoStatus.FAILURE, fail);
 			} else {
-				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, "ok");
+				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, success);
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto(ResponseDtoStatus.FAILURE, "unexpected exception 1");
+			dto = new ReponseDto(ResponseDtoStatus.FAILURE, exception);
 			e.printStackTrace();
 		}
 
 		return ResponseEntity.ok(dto);
 	}
-	
+
 	@GetMapping(value = "artist/{Name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReponseDto<List<AlbumDto>>> findAllAlbumByArtistNameDtoWithMapping(
 			@PathVariable("Name") String name) {
@@ -51,13 +54,13 @@ public class AlbumController {
 		try {
 			List<AlbumDto> album = repository.findAllAlbumByArtistNameDtoWithMapping(name);
 			if (album == null) {
-				dto = new ReponseDto(ResponseDtoStatus.FAILURE, "album not found");
+				dto = new ReponseDto(ResponseDtoStatus.FAILURE, fail);
 			} else {
-				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, "ok");
+				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, success);
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto(ResponseDtoStatus.FAILURE, "unexpected exception 2");
+			dto = new ReponseDto(ResponseDtoStatus.FAILURE, exception);
 			e.printStackTrace();
 		}
 
@@ -72,29 +75,28 @@ public class AlbumController {
 			repository.deleteAlbum(id);
 			dto = new ReponseDto<Object>(ResponseDtoStatus.SUCCESS, "album deleted");
 		} catch (AlbumNotFoundException e) {
-			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "album not found");
+			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, fail);
 		} catch (Exception e) {
-			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, "unexpected exception 3");
+			dto = new ReponseDto<Object>(ResponseDtoStatus.FAILURE, exception);
 		}
 
 		return ResponseEntity.ok(dto);
 	}
 
 	@GetMapping(value = "genre/{Name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ReponseDto> findAllAlbumByGenreNameDtoWithMapping(
-			@PathVariable("Name") String name) {
+	public ResponseEntity<ReponseDto> findAllAlbumByGenreNameDtoWithMapping(@PathVariable("Name") String name) {
 
 		ReponseDto<List<AlbumDto>> dto = null;
 		try {
 			List<AlbumDto> album = repository.findAllAlbumByGenreNameDtoWithMapping(name);
 			if (album == null) {
-				dto = new ReponseDto(ResponseDtoStatus.FAILURE, "album not found");
+				dto = new ReponseDto(ResponseDtoStatus.FAILURE, fail);
 			} else {
-				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, "ok");
+				dto = new ReponseDto(ResponseDtoStatus.SUCCESS, success);
 				dto.setPayload(album);
 			}
 		} catch (Exception e) {
-			dto = new ReponseDto(ResponseDtoStatus.FAILURE, "unexpected exception 4");
+			dto = new ReponseDto(ResponseDtoStatus.FAILURE, exception);
 			e.printStackTrace();
 		}
 
